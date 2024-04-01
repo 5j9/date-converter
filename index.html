@@ -48,21 +48,21 @@
     ga('create', 'UA-98265042-4', 'auto');
     ga('send', 'pageview');
 
-    document.getElementById("convertToJalaliForm").onsubmit = function(){
+    document.getElementById("convertToJalaliForm").oninput = function(){
         var input = document.getElementById("gregorianInput").value;
         var output = moment(input, 'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD');
         document.getElementById("jalaliOutput").innerText = output;
         return false;
     };
 
-    document.getElementById("convertToGregorianForm").onsubmit = function(){
+    document.getElementById("convertToGregorianForm").oninput = function(){
         var input = document.getElementById("jalaliInput").value;
         var output = moment.from(input, 'fa', 'YYYY/MM/DD').locale('en').format('YYYY/MM/DD');
         document.getElementById("gregorianOutput").innerText = output;
         return false;
     };
 
-    document.getElementById("validateShamsiForm").onsubmit = function() {
+    document.getElementById("validateShamsiForm").oninput = function() {
         var output="";
         try{
             var input = document.getElementById("validatingDate").value;
