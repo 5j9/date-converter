@@ -27,15 +27,6 @@
       </form>
       <code>moment.from(input, 'fa', 'YYYY/MM/DD').locale('en').format('YYYY/MM/DD');</code>
     </section>
-
-    <section>
-      <form id="validateShamsiForm">
-        <input id="validatingDate" placeHolder="YYYY/MM/DD" value="">
-        <button type="submit">validate</button>
-        <span id="ValidationOutput"></span>
-      </form>
-      <code>moment(input, 'YYYY/MM/DD').isValid();</code>
-    </section>
   </main>
 </article>
 
@@ -62,24 +53,6 @@
         return false;
     };
 
-    document.getElementById("validateShamsiForm").oninput = function() {
-        var output="";
-        try{
-            var input = document.getElementById("validatingDate").value;
-            var m = moment(input, 'jYYYY/jMM/jDD');
-            if(m.isValid()){
-                output = "معتبر است";
-            } else {
-                output = "معتبر نیست";
-            }
-        }
-        catch(e){
-            output = "معتبر نیست";
-        }
-        document.getElementById("ValidationOutput").innerText = output;
-        return false;
-    };
 </script>
-
 </body>
 </html>
