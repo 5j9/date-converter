@@ -1,47 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>تبدیل بین تاریخ هجری خورشیدی و میلادی</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="dist/jalali-moment.browser.js"></script>
 </head>
+
 <body>
-<article>
-  <main>
-    <section>
-      <form id="convertToJalaliForm">
-        <input id="gregorianInput">
-        <button type="submit">to Jalali</button>
-        <span id="jalaliOutput"></span>
-      </form>
+  <article>
+    <main>
+      <section>
+        <form id="convertToJalaliForm">
+          <input id="gregorianInput">
+          <button type="submit">to Jalali</button>
+          <span id="jalaliOutput"></span>
+        </form>
 
-    </section>
+      </section>
 
-    <section>
-      <form id="convertToGregorianForm">
-        <input id="jalaliInput">
-        <button id="convertToGregorian">to Gregorian</button>
-        <span id="gregorianOutput"></span>
-      </form>
-    </section>
-  </main>
-</article>
+      <section>
+        <form id="convertToGregorianForm">
+          <input id="jalaliInput">
+          <button id="convertToGregorian">to Gregorian</button>
+          <span id="gregorianOutput"></span>
+        </form>
+      </section>
+    </main>
+  </article>
 
-<script>
-    document.getElementById("convertToJalaliForm").oninput = function(){
-        var input = document.getElementById("gregorianInput").value;
-        var output = moment(input, 'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD');
-        document.getElementById("jalaliOutput").innerText = output;
-        return false;
+  <script>
+    // from https://stackoverflow.com/a/51113170/2705757
+    function toEnglishDigits(str) {
+
+      // convert persian digits [۰۱۲۳۴۵۶۷۸۹]
+      var e = '۰'.charCodeAt(0);
+      str = str.replace(/[۰-۹]/g, function (t) {
+        return t.charCodeAt(0) - e;
+      });
+
+      // convert arabic indic digits [٠١٢٣٤٥٦٧٨٩]
+      e = '٠'.charCodeAt(0);
+      str = str.replace(/[٠-٩]/g, function (t) {
+        return t.charCodeAt(0) - e;
+      });
+      return str;
+    }
+
+    document.getElementById("convertToJalaliForm").oninput = function () {
+      var input = document.getElementById("gregorianInput").value;
+      input = toEnglishDigits(input);
+      var output = moment(input, 'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD');
+      document.getElementById("jalaliOutput").innerText = output;
+      return false;
     };
 
-    document.getElementById("convertToGregorianForm").oninput = function(){
-        var input = document.getElementById("jalaliInput").value;
-        var output = moment.from(input, 'fa', 'YYYY/MM/DD').locale('en').format('YYYY/MM/DD');
-        document.getElementById("gregorianOutput").innerText = output;
-        return false;
+    document.getElementById("convertToGregorianForm").oninput = function () {
+      var input = document.getElementById("jalaliInput").value;
+      input = toEnglishDigits(input);
+      var output = moment.from(input, 'fa', 'YYYY/MM/DD').locale('en').format('YYYY/MM/DD');
+      document.getElementById("gregorianOutput").innerText = output;
+      return false;
     };
-</script>
+  </script>
 </body>
+
 </html>
