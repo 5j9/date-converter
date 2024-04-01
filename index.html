@@ -11,34 +11,24 @@
   <main>
     <section>
       <form id="convertToJalaliForm">
-        <input id="gregorianInput" placeHolder="YYYY/MM/DD" value="">
+        <input id="gregorianInput">
         <button type="submit">to Jalali</button>
         <span id="jalaliOutput"></span>
       </form>
-      <code>moment(input, 'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD');</code>
 
     </section>
 
     <section>
       <form id="convertToGregorianForm">
-        <input id="jalaliInput" placeHolder="YYYY/MM/DD" value="">
+        <input id="jalaliInput">
         <button id="convertToGregorian">to Gregorian</button>
         <span id="gregorianOutput"></span>
       </form>
-      <code>moment.from(input, 'fa', 'YYYY/MM/DD').locale('en').format('YYYY/MM/DD');</code>
     </section>
   </main>
 </article>
 
 <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-98265042-4', 'auto');
-    ga('send', 'pageview');
-
     document.getElementById("convertToJalaliForm").oninput = function(){
         var input = document.getElementById("gregorianInput").value;
         var output = moment(input, 'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD');
@@ -52,7 +42,6 @@
         document.getElementById("gregorianOutput").innerText = output;
         return false;
     };
-
 </script>
 </body>
 </html>
