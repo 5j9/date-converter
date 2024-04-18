@@ -11,24 +11,38 @@
 <body>
   <article>
     <main>
-      <section>
+      <section class='centerSec'>
+        <h2>Gregorian</h2>
         <form id="convertToJalaliForm">
-          <input id="gregorianInput">
-          <span>to Jalali:</span>
-          <span id="jalaliOutput"></span>
+          <button onclick='return copyToClipboard("gregorian")'>📋</button>
+          <input id="gregorian">
         </form>
 
       </section>
-
-      <section>
+      ↔
+      <section class='centerSec'>
+        <h2>Jalali</h2>
         <form id="convertToGregorianForm">
-          <input id="jalaliInput">
-          <span>to Gregorian:</span>
-          <span id="gregorianOutput"></span>
+          <input id="jalali">
+          <button onclick='return copyToClipboard("jalali")'>📋</button>
         </form>
       </section>
     </main>
   </article>
+
+  <style>
+    input {
+      text-align: center;
+    }
+
+    main {
+      text-align: center;
+    }
+
+    .centerSec {
+      display: inline-block;
+    }
+  </style>
 
   <script>
     // from https://stackoverflow.com/a/51113170/2705757
@@ -49,20 +63,26 @@
     }
 
     document.getElementById("convertToJalaliForm").oninput = function () {
-      var input = document.getElementById("gregorianInput").value;
+      var input = document.getElementById("gregorian").value;
       input = toEnglishDigits(input);
       var output = moment(input, 'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD');
-      document.getElementById("jalaliOutput").innerText = output;
+      document.getElementById("jalali").value = output;
       return false;
     };
 
     document.getElementById("convertToGregorianForm").oninput = function () {
-      var input = document.getElementById("jalaliInput").value;
+      var input = document.getElementById("jalali").value;
       input = toEnglishDigits(input);
-      var output = moment.from(input, 'fa', 'YYYY/MM/DD').locale('en').format('YYYY/MM/DD');
-      document.getElementById("gregorianOutput").innerText = output;
+      var output = moment.from(input, 'fa', 'YYYY/MM/DD').locale('en').format('YYYY-MM-DD');
+      document.getElementById("gregorian").value = output;
       return false;
     };
+
+    function copyToClipboard(id) {
+      var value = document.getElementById(id).value;
+      navigator.clipboard.writeText(value);
+      return false;
+    } 
   </script>
 </body>
 
