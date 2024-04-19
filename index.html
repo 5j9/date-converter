@@ -15,7 +15,7 @@
         <h2>Gregorian</h2>
         <form id="convertToJalaliForm">
           <button onclick='return copyToClipboard("gregorian")'>📋</button>
-          <input id="gregorian">
+          <input id="gregorian" onclick="this.value = ''">
         </form>
 
       </section>
@@ -23,7 +23,7 @@
       <section class='centerSec'>
         <h2>Jalali</h2>
         <form id="convertToGregorianForm">
-          <input id="jalali">
+          <input id="jalali" onclick="this.value = ''">
           <button onclick='return copyToClipboard("jalali")'>📋</button>
         </form>
       </section>
