@@ -27,6 +27,8 @@
           <button onclick='return copyToClipboard("jalali")'>📋</button>
         </form>
       </section>
+      <br>
+      <button onclick="return today()">today</button>
     </main>
   </article>
 
@@ -49,15 +51,13 @@
     function toEnglishDigits(str) {
 
       // convert persian digits [۰۱۲۳۴۵۶۷۸۹]
-      var e = '۰'.charCodeAt(0);
-      str = str.replace(/[۰-۹]/g, function (t) {
-        return t.charCodeAt(0) - e;
+      str = str.replace(/[\u06f0-۹]/g, function (t) {  // \u06f0 is Persian zero
+        return t.charCodeAt(0) - 1776;  // 1776 == '۰'.charCodeAt()
       });
 
       // convert arabic indic digits [٠١٢٣٤٥٦٧٨٩]
-      e = '٠'.charCodeAt(0);
-      str = str.replace(/[٠-٩]/g, function (t) {
-        return t.charCodeAt(0) - e;
+      str = str.replace(/[\u0660-٩]/g, function (t) {  // \u0660 is Arabic zero
+        return t.charCodeAt(0) - 1632; // 1632 == '٠'.charCodeAt()
       });
       return str;
     }
@@ -82,7 +82,13 @@
       var value = document.getElementById(id).value;
       navigator.clipboard.writeText(value);
       return false;
-    } 
+    }
+
+    function today() {
+      document.getElementById("gregorian").value = new Date().toISOString().slice(0, 10);
+      document.getElementById('convertToJalaliForm').dispatchEvent(new InputEvent('input'));
+      return false;
+    }
   </script>
 </body>
 
